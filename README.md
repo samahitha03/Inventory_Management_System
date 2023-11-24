@@ -37,3 +37,9 @@ Acknowledgements
 MFRC522 library
 ESP8266WiFi library
 Arduino
+
+![image](https://github.com/Samahitha0/Inventory_Management_System/assets/100484362/8084a255-94ab-4847-bf2d-205a68e50cbb)
+
+![a2](https://github.com/Samahitha0/Inventory_Management_System/assets/100484362/29798dc1-cab7-4db2-b224-dbd228e32917)
+
+![a3](https://github.com/Samahitha0/Inventory_Management_System/assets/100484362/bd8ad741-b1c3-4556-9a21-c309c0db116e)
