@@ -3,12 +3,12 @@
 #include <SPI.h>
 #include <ESP8266HTTPClient.h>
 
-const char* ssid = "";
-const char* password = "";
-const char* thingSpeakApiKey = "";
-const char* thingSpeakChannelId = "";
+const char* ssid = "Enter your Wifi SSID";
+const char* password = "Enter your WIFI Password";
+const char* thingSpeakApiKey = "ThingSpeak API KEY";
+const char* thingSpeakChannelId = "ThingSpeak Channel ID";
 const char* pushingBoxHost = "api.pushingbox.com";
-const char* pushingBoxDevId = "";
+const char* pushingBoxDevId = "Pushingbox device ID";
 
 #define RST_PIN D3
 #define SS_PIN D4
@@ -33,6 +33,17 @@ int inventoryCount = 0;
 WiFiClient client;
 
 const unsigned long updateThreshold = 3000;
+
+unsigned long simpleHash(const char* str) {
+  unsigned long hash = 5381;
+  int c;
+
+  while ((c = *str++)) {
+    hash = ((hash << 5) + hash) + c; /* hash * 33 + c */
+  }
+
+  return hash;
+}
 
 void addProduct(const char *rfidTag, String name, int quantity, float price, String alertMessage);
 Product *findProductByRFID(const char *rfidTag);
@@ -160,6 +171,8 @@ Product *findProductByRFID(const char *rfidTag) {
 }
 
 void sendToThingSpeak(const char *rfidTag, int quantity, float price) {
+  unsigned long hashValue = simpleHash(rfidTag);
+
   String url = "/update";
   String apiKeyParam = "api_key=";
   apiKeyParam += thingSpeakApiKey;
@@ -167,10 +180,10 @@ void sendToThingSpeak(const char *rfidTag, int quantity, float price) {
   quantityParam += String(quantity);
   String priceParam = "&field2=";
   priceParam += String(price);
-  String rfidParam = "&field3=";
-  rfidParam += String(rfidTag);
+  String hashParam = "&field3=";
+  hashParam += String(hashValue);
 
-  String postData = apiKeyParam + quantityParam + priceParam + rfidParam;
+  String postData = apiKeyParam + quantityParam + priceParam + hashParam;
 
   HTTPClient http;
   http.begin(client, "http://api.thingspeak.com" + url);
@@ -229,7 +242,7 @@ void sendPushingBoxNotification() {
   Serial.println();
   Serial.println("PushingBox notification sent");
   pbClient.stop();
-  delay(5000);
+  delay(2000);
 }
 
 void updateInventory() {
