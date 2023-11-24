@@ -14,6 +14,7 @@ This project implements an RFID inventory management system using Arduino (NodeM
 - Real-time inventory updates
 - Low quantity alerts with push notifications
 - Machine learning algorithm to predict
+- Simple hash function applied to send rfid reading to thingspeak
 
 ## Getting Started
 
