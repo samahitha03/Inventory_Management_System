@@ -1,7 +1,7 @@
 # Inventory_Management_System
 IOT based inventory Management System using RFID Reader and cards
 An Arduino-based RFID inventory management system that utilizes Wi-Fi for communication and ensures secure data transfer.
-
+Machine learning algorithm to predict the quantity sold on a particular day
 ## Overview
 
 This project implements an RFID inventory management system using Arduino (NodeMCU), allowing for real-time tracking of product quantities. The system leverages Wi-Fi for communication and includes a secure data transfer mechanism using HTTPS.
@@ -13,6 +13,7 @@ This project implements an RFID inventory management system using Arduino (NodeM
 - Secure communication using HTTPS
 - Real-time inventory updates
 - Low quantity alerts with push notifications
+- Machine learning algorithm to predict
 
 ## Getting Started
 
